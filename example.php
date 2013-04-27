@@ -1,40 +1,22 @@
 <?php
-/**
- * Dummy
- *
- * @author nerdklers
- * @version 0.1
- */
-class Dummy {
+class DateClass {
+	/**
+	 * Get current time from date format
+	 *
+	 * @param string $format Format for date
+	 * @return string Formatted date
+	 */
+	public static function getTimeFromFormat( $format = DateTime::ISO8601 ) {
+		$dateTime = new DateTime;
+		$formattedDate = $dateTime->format( $format );
+		$parsedDate = date_parse( $formattedDate );
 
-	const CLASS_CONSTANT = true;
-	private $property;
-
-	public function getProperty() {
-		return $this->property;
-	}
-
-	public function setProperty($property) {
-		$this->property = $property;
-	}
-
-	public static function isConstantTrue() {
-		if (self::CLASS_CONSTANT) {
-			return true;
-		} else {
-			throw new Exception('Constant is not true');
+		if (! checkdate($parsedDate['month'], $parsedDate['day'], $parsedDate['year'])) {
+			throw new Exception( 'Date could not be formatted' );
 		}
-	}
 
+		return $formattedDate;
+	}
 }
 
-$example = new Dummy;
-$example->setProperty('Value');
-
-try {
-	if ( Dummy::isConstantTrue() ) {
-		echo 'First character in property value: ' . substr( $example->getProperty(), 0, 1 );
-	}
-} catch ( Exception $e ) {
-	echo $e->getMessage();
-}
+echo DateClass::getTimeFromFormat();
