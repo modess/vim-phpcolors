@@ -52,3 +52,6 @@ hi phpComment		guifg=#999999
 hi phpClasses		guifg=#fff685
 hi phpSpecial		guifg=#f8a4e7
 hi phpMethodsVar	guifg=#fff685
+
+" Git gutter
+hi SignColumn                       guibg=#111111
